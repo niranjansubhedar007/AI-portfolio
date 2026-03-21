@@ -227,14 +227,14 @@ export default function App() {
         >
           {/* Welcome Message - Compact */}
           {conversation.length === 0 && (
-            <div className="text-center animate-fadeIn py-4">
+            <div className="text-center animate-fadeIn md:py-4 ">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 mb-3 shadow-lg">
                 <Bot className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Hello! I'm your AI Assistant
               </h2>
-              <p className="text-gray-600 mb-4 text-sm max-w-md mx-auto">
+              <p className="text-gray-600 mb-4 md:text-sm text-xs max-w-md mx-auto">
                 Ask me anything about Niranjan's skills, experience, projects, background and other details.
               </p>
             </div>
@@ -349,7 +349,7 @@ export default function App() {
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 rows={1}
-                className="flex-1 px-3 py-2 text-sm text-gray-700 placeholder-gray-400 focus:outline-none resize-none rounded-lg"
+                className="flex-1 px-3 py-2  text-xs md:text-sm text-gray-700 placeholder-gray-400 focus:outline-none resize-none rounded-lg"
                 style={{ maxHeight: "100px" }}
               />
               <button
@@ -361,11 +361,11 @@ export default function App() {
                     : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-md hover:scale-105 active:scale-95"
                 }`}
               >
-                <Send className="w-3.5 h-3.5" />
+                <Send className="w-3.5 h-3.5 ml-1" />
                 <span className="hidden sm:inline text-sm">Send</span>
               </button>
             </div>
-            <div className="text-[10px] text-gray-400 text-center mt-1.5 flex items-center justify-center space-x-3">
+            <div className="text-[10px] hidden md:block text-gray-400 text-center mt-1.5 flex items-center justify-center space-x-3">
               <span>Press Enter to send</span>
               <span>•</span>
               <span>Click question tags to fill the input</span>

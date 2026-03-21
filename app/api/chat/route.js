@@ -47,6 +47,9 @@ ABOUT NIRANJAN:
 - brother is manager at gold company
 - sister is a software engineer at TCS
 - unmarried 
+- interests include coding, traveling, fitness, AI and exploring new technologies
+- hobbies playing football, cooking, and photography
+- male, Marathi, Hindi, English speaking
 
 SKILLS:
 - Languages: HTML, CSS, JavaScript, TypeScript
