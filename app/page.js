@@ -122,7 +122,7 @@ export default function App() {
             ),
             // Style for code
             code: ({ children }) => (
-              <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">
+              <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono">
                 {children}
               </code>
             ),
