@@ -184,7 +184,7 @@ export default function App() {
             Hello! I'm your AI Assistant
           </h2>
           <p className={`text-gray-600 mb-6 ${conversation.length > 0 ? 'text-base' : 'text-lg'}`}>
-            Ask me anything about Niranjan's skills, experience, projects, or background
+            Ask me anything about Niranjan's skills, experience, projects, background and other details.
           </p>
         </div>
 
