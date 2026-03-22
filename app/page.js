@@ -14,6 +14,8 @@ export default function App() {
   const chatContainerRef = useRef(null);
   const isUserScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef(null);
+  const textareaRef = useRef(null);
+  const quickQuestionsRef = useRef(null);
 
   const suggestions = [
     { label: "Skills & Expertise", query: "Tell me about skills and expertise" },
@@ -113,7 +115,16 @@ export default function App() {
 
   const handleSuggestionClick = (query) => {
     setMessage(query);
-    document.querySelector('textarea')?.focus();
+    
+    if (textareaRef.current) {
+      textareaRef.current.blur();
+      textareaRef.current.classList.add('bg-blue-50');
+      setTimeout(() => {
+        if (textareaRef.current) {
+          textareaRef.current.classList.remove('bg-blue-50');
+        }
+      }, 200);
+    }
   };
 
   const clearConversation = () => {
@@ -122,53 +133,61 @@ export default function App() {
     setMessage("");
     setShowScrollButton(false);
     isUserScrollingRef.current = false;
+    
+    if (textareaRef.current) {
+      textareaRef.current.blur();
+    }
   };
 
-  // Custom component to render formatted text
+  // Custom component to render formatted text with proper word wrapping
   const MessageContent = ({ content, role }) => {
     if (role === "user") {
-      return <p className="text-sm leading-relaxed whitespace-pre-wrap">{content}</p>;
+      return <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{content}</p>;
     }
     
     return (
-      <div className="prose prose-sm max-w-none">
+      <div className="prose prose-sm max-w-none w-full">
         <ReactMarkdown
           components={{
             strong: ({ children }) => (
-              <strong className="font-bold text-gray-900">{children}</strong>
+              <strong className="font-bold text-gray-900 break-words">{children}</strong>
             ),
             em: ({ children }) => (
-              <em className="italic text-gray-700">{children}</em>
+              <em className="italic text-gray-700 break-words">{children}</em>
             ),
             ul: ({ children }) => (
-              <ul className="list-disc pl-4 my-1 space-y-0.5">{children}</ul>
+              <ul className="list-disc pl-4 my-1 space-y-0.5 break-words">{children}</ul>
             ),
             ol: ({ children }) => (
-              <ol className="list-decimal pl-4 my-1 space-y-0.5">{children}</ol>
+              <ol className="list-decimal pl-4 my-1 space-y-0.5 break-words">{children}</ol>
             ),
             li: ({ children }) => (
-              <li className="text-sm text-gray-700">{children}</li>
+              <li className="text-sm text-gray-700 break-words">{children}</li>
             ),
             h1: ({ children }) => (
-              <h1 className="text-lg font-bold mt-2 mb-1 text-gray-900">{children}</h1>
+              <h1 className="text-lg font-bold mt-2 mb-1 text-gray-900 break-words">{children}</h1>
             ),
             h2: ({ children }) => (
-              <h2 className="text-md font-bold mt-1.5 mb-1 text-gray-900">{children}</h2>
+              <h2 className="text-md font-bold mt-1.5 mb-1 text-gray-900 break-words">{children}</h2>
             ),
             h3: ({ children }) => (
-              <h3 className="text-sm font-bold mt-1 mb-0.5 text-gray-900">{children}</h3>
+              <h3 className="text-sm font-bold mt-1 mb-0.5 text-gray-900 break-words">{children}</h3>
             ),
             p: ({ children }) => (
-              <p className="text-sm leading-relaxed mb-1">{children}</p>
+              <p className="text-sm leading-relaxed mb-1 break-words">{children}</p>
             ),
             code: ({ children }) => (
-              <code className="bg-gray-100 px-1 py-0.5 rounded text-xs font-mono">
+              <code className="bg-gray-100 px-1 py-0.5 rounded text-xs font-mono break-all">
                 {children}
               </code>
             ),
             a: ({ href, children }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer" 
-                 className="text-blue-600 hover:text-blue-700 underline">
+              <a 
+                href={href} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-blue-600 hover:text-blue-700 underline break-all"
+              >
                 {children}
               </a>
             ),
@@ -204,9 +223,7 @@ export default function App() {
                   <span className="hidden sm:inline">New Chat</span>
                 </button>
               )}
-              <div className="md:text-xs text-[11px] text-gray-500">
-                Ask me about Niranjan
-              </div>
+             
             </div>
           </div>
         </div>
@@ -214,64 +231,65 @@ export default function App() {
 
       {/* Main Content - Perfect Scroll Area */}
       <main className="flex-1 flex flex-col max-w-4xl mx-auto w-full px-4 sm:px-6 overflow-hidden">
+        {/* Fixed Quick Questions Section - Always visible */}
+        <div ref={quickQuestionsRef} className="flex-shrink-0 mb-5">
+          <div className="flex items-center justify-between mb-2.5">
+            <h3 className="text-xs font-semibold mt-2 text-gray-700 uppercase tracking-wider">
+              Quick Questions
+            </h3>
+            {conversation.length > 0 && (
+              <button
+                onClick={clearConversation}
+                className="text-[11px] text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Clear all
+              </button>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {suggestions.map((suggestion) => (
+              <button
+                key={suggestion.label}
+                onClick={() => handleSuggestionClick(suggestion.query)}
+                disabled={loading}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shadow-sm touch-manipulation ${
+                  loading
+                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    : "bg-white border border-gray-200 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:border-blue-200 hover:shadow-md active:scale-95"
+                }`}
+              >
+                {suggestion.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Scrollable Chat Container */}
         <div 
           ref={chatContainerRef}
           onScroll={handleScroll}
-          className="flex-1 overflow-y-auto scroll-smooth py-4"
+          className="flex-1 overflow-y-auto scroll-smooth"
           style={{ 
             scrollBehavior: "smooth",
             msOverflowStyle: "none",
-            scrollbarWidth: "thin"
+            scrollbarWidth: "thin",
+            WebkitOverflowScrolling: "touch"
           }}
         >
-          {/* Welcome Message - Compact */}
+          {/* Welcome Message - Only show when no conversation */}
           {conversation.length === 0 && (
-            <div className="text-center animate-fadeIn md:py-4 ">
+            <div className="text-center animate-fadeIn py-4">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 mb-3 shadow-lg">
                 <Bot className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Hello! I'm your AI Assistant
               </h2>
-              <p className="text-gray-600 mb-4 md:text-sm text-xs max-w-md mx-auto">
+              <p className="text-gray-600 mb-4 text-sm max-w-md mx-auto">
                 Ask me anything about Niranjan's skills, experience, projects, background and other details.
               </p>
             </div>
           )}
-
-          {/* Question Tags - Always Visible */}
-          <div className="mb-5">
-            <div className="flex items-center justify-between mb-2.5">
-              <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                Quick Questions
-              </h3>
-              {conversation.length > 0 && (
-                <button
-                  onClick={clearConversation}
-                  className="text-[11px] text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  Clear all
-                </button>
-              )}
-            </div>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {suggestions.map((suggestion) => (
-                <button
-                  key={suggestion.label}
-                  onClick={() => handleSuggestionClick(suggestion.query)}
-                  disabled={loading}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shadow-sm ${
-                    loading
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-white border border-gray-200 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:border-blue-200 hover:shadow-md hover:scale-105 active:scale-95"
-                  }`}
-                >
-                  {suggestion.label}
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Conversation Messages */}
           {conversation.length > 0 && (
@@ -291,7 +309,7 @@ export default function App() {
                     </div>
                   )}
                   <div
-                    className={`max-w-[75%] rounded-2xl px-4 py-2 ${
+                    className={`max-w-[85%] sm:max-w-[75%] rounded-2xl px-4 py-2 overflow-hidden ${
                       msg.role === "user"
                         ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm"
                         : "bg-white text-gray-800 shadow-sm border border-gray-100"
@@ -332,7 +350,7 @@ export default function App() {
           <div className="sticky bottom-20 flex justify-center z-10 pointer-events-none">
             <button
               onClick={() => scrollToBottom("smooth")}
-              className="pointer-events-auto bg-white shadow-lg hover:shadow-xl rounded-full p-1.5 transition-all duration-200 animate-bounce-slow border border-gray-200"
+              className="pointer-events-auto bg-white shadow-lg hover:shadow-xl rounded-full p-1.5 transition-all duration-200 animate-bounce-slow border border-gray-200 touch-manipulation"
             >
               <ChevronDown className="w-4 h-4 text-blue-600" />
             </button>
@@ -344,37 +362,69 @@ export default function App() {
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-1.5">
             <div className="flex items-end space-x-1.5">
               <textarea
+                ref={textareaRef}
                 placeholder="Ask me anything about Niranjan..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 rows={1}
-                className="flex-1 px-3 py-2  text-xs md:text-sm text-gray-700 placeholder-gray-400 focus:outline-none resize-none rounded-lg"
-                style={{ maxHeight: "100px" }}
+                className="flex-1 px-3 py-2 text-xs md:text-sm text-gray-700 placeholder-gray-400 focus:outline-none resize-none rounded-lg transition-colors duration-200"
+                style={{ 
+                  maxHeight: "100px",
+                  fontSize: "16px"
+                }}
               />
               <button
                 onClick={sendMessage}
                 disabled={loading || !message.trim()}
-                className={`px-3.5 py-2 rounded-lg font-medium transition-all duration-200 flex items-center space-x-1.5 ${
+                className={`px-3.5 py-2 rounded-lg mb-1 font-medium transition-all duration-200 flex items-center space-x-1.5 touch-manipulation ${
                   loading || !message.trim()
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-md hover:scale-105 active:scale-95"
+                    : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-md active:scale-95 "
                 }`}
               >
                 <Send className="w-3.5 h-3.5 ml-1" />
                 <span className="hidden sm:inline text-sm">Send</span>
               </button>
             </div>
-            <div className="text-[10px] hidden md:block text-gray-400 text-center mt-1.5 flex items-center justify-center space-x-3">
+            {/* <div className="text-[10px]  text-gray-400 text-center mt-1.5 flex items-center justify-center space-x-3">
               <span>Press Enter to send</span>
               <span>•</span>
               <span>Click question tags to fill the input</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </main>
 
-      <style jsx>{`
+      <style jsx global>{`
+        /* Prevent zoom on input focus for mobile */
+        @media (max-width: 768px) {
+          input, textarea, select {
+            font-size: 16px !important;
+          }
+          
+          /* Prevent viewport zoom */
+          .touch-manipulation {
+            touch-action: manipulation;
+          }
+        }
+        
+        /* Disable auto-zoom on focus for iOS */
+        textarea:focus {
+          font-size: 16px;
+        }
+        
+        /* Ensure all text wraps properly */
+        .break-words {
+          word-wrap: break-word;
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
+        
+        .break-all {
+          word-break: break-all;
+        }
+        
         @keyframes fadeIn {
           from {
             opacity: 0;
@@ -443,6 +493,15 @@ export default function App() {
         /* Remove default focus outline */
         textarea:focus, button:focus {
           outline: none;
+        }
+        
+        /* Ensure markdown content doesn't overflow */
+        .prose {
+          max-width: 100%;
+        }
+        
+        .prose * {
+          max-width: 100%;
         }
       `}</style>
     </div>

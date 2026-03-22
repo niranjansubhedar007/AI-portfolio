@@ -81,6 +81,7 @@ PROJECTS:
    - Integrated MetaTrader 5 support
    - Built ticket system and IB (Introducing Broker) module
    - Implemented email notification system
+   - https://dashboard.zuperior.com/
 
 2. Zuperior Website
    - Developed trading and risk management calculator
@@ -91,6 +92,7 @@ PROJECTS:
    - Enhanced UI using Framer Motion and GSAP animations
    - Implemented smooth scrolling with Lenis
    - Integrated EmailJS for lead generation and communication
+   - https://zuperior.com/
 
 3. Booming Realm
    - Developed secure web-based lead & project management platform
@@ -102,6 +104,7 @@ PROJECTS:
    - Added real-time notifications and audit logs
    - Implemented automated email system
    - Integrated Supabase backend with privacy policies
+   - https://brokers.boomingrealm.com/login/
 
 EDUCATION:
 - Bachelor of Computer Application (BCA), 2022 – 81%
