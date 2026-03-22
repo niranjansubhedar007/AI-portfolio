@@ -50,6 +50,10 @@ ABOUT NIRANJAN:
 - interests include coding, traveling, fitness, AI and exploring new technologies
 - hobbies playing football, cooking, and photography
 - male, Marathi, Hindi, English speaking
+- weaknesses: can be a perfectionist at times, tends to overthink, can be a bit reserved in social situations
+- strengths: strong problem-solving skills, quick learner, good team player, highly motivated and dedicated to his work
+- passionate about using technology to create innovative solutions and make a positive impact in the world
+
 
 SKILLS:
 - Languages: HTML, CSS, JavaScript, TypeScript
