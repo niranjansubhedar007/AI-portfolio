@@ -53,6 +53,7 @@ ABOUT NIRANJAN:
 - weaknesses: can be a perfectionist at times, tends to overthink, can be a bit reserved in social situations
 - strengths: strong problem-solving skills, quick learner, good team player, highly motivated and dedicated to his work
 - passionate about using technology to create innovative solutions and make a positive impact in the world
+- expetations: looking for opportunities to work on challenging projects, collaborate with talented teams, and continue growing as a developer while contributing to meaningful and impactful work
 
 
 SKILLS:
@@ -62,6 +63,7 @@ SKILLS:
 - Databases: MongoDB, Supabase, PostgreSQL
 - Tools: Git, GitHub
 - Hosting: Vercel, AWS, Netlify, OnRender
+- Other: AI-based technical and sentiment analysis
 
 EXPERIENCE:
 1. Booming Bulls Academy (2025 - Present)
