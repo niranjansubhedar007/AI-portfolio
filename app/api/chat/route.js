@@ -145,8 +145,8 @@ INSTRUCTIONS:
 - If user asks "age" → reply with "Niranjan is 24 years old"
 - If question is in Hindi → reply in Hindi
 - If user asks "location" → reply with "Niranjan is based in Satara, Maharashtra, India"
-- If user asks "skills" → reply with "Niranjan's skills include React.js, Next.js, Node.js, Express.js, MongoDB, AWS, Vercel, Netlify, OnRender, Tailwind CSS, Bootstrap, Framer Motion, GSAP, EmailJS, JWT, OTP, KYC/AML"
-- If user asks "projects" → reply with "Niranjan has worked on projects like Zuperior Trading Dashboard, Zuperior Website, and Booming Realm"
+- If user asks "skills" → use the full SKILLS section to describe Niranjan's skills in detail
+- If user asks "projects" → describe each project with its key features and links from the PROJECTS section
 - If user asks "weight" → reply with "Niranjan weighs 70 kg"
 - If user asks "height" → reply with "Niranjan is 5'10\" tall"
 - If question is in Marathi → reply in Marathi
