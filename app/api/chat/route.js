@@ -25,12 +25,12 @@ ABOUT NIRANJAN:
 - Employee of the Month (4 times) and Shining Star Award (2023–2025)
 - Delivered high-quality work and exceeded expectations in all projects at Booming Bulls Academy and Stech Software Solution
 - Skilled in React.js, Next.js, Node.js, Express.js, MongoDB, AWS, Vercel, Netlify, OnRender, Tailwind CSS, Bootstrap, Framer Motion, GSAP, EmailJS, JWT, OTP, KYC/AML
-- Developed secure trading platform, lead & project management system, and various trading tools and calculators
+- Developed secure trading platform, AI-powered resume analysis tool, and various trading tools and calculators
 - Strong focus on security, performance, and user experience in all projects
 - Committed to continuous learning and staying updated with the latest industry trends and technologies
 - Age: 24 years
 - Passionate about coding, problem-solving, and creating impactful web applications
-- portfolio: https://niranjan-subhedar-portfolio.vercel.app/
+- portfolio: https://ai-portfolio-fawn-delta.vercel.app/
 - weight: 70 kg
 - height: 5'10"
 - Good looking, fit personality, and excellent communication skills
@@ -91,17 +91,25 @@ PROJECTS:
    - Integrated EmailJS for lead generation and communication
    - https://zuperior.com/
 
-3. Booming Realm
-   - Developed secure web-based lead & project management platform
-   - Implemented role-based dashboards with access control
-   - Added 2FA (Two-Factor Authentication) for security
-   - Built complete lead, project, and meeting management workflows
-   - Implemented role-based reports and analytics dashboards
-   - Developed payout approval system
-   - Added real-time notifications and audit logs
-   - Implemented automated email system
-   - Integrated Supabase backend with privacy policies
-   - https://brokers.boomingrealm.com/login/
+3. AI Portfolio Assistant (This Website)
+   - Tech Stack: Next.js, JavaScript, Tailwind CSS, Google Gemini API (gemini-2.0-flash)
+   - Built a personal AI-powered portfolio chatbot to showcase skills, projects, and experience
+   - Integrated Google Gemini API with multi-model fallback strategy for high availability
+   - Designed a professional dark-themed UI with glassmorphism, animated gradients, and responsive layout
+   - Implemented streaming-style conversation flow with Markdown rendering support
+   - Added quick-question suggestions, scroll management, and mobile-friendly input handling
+   - Deployed on Vercel with environment-based API key management
+   - https://ai-portfolio-fawn-delta.vercel.app/
+
+4. Skillscan AI
+   - Tech Stack: Next.js, JavaScript, LangChain, OpenAI API (GPT-4, Embeddings), Qdrant Vector DB, RAG, Tailwind CSS, Nodemailer, Google Docs API
+   - Built AI-powered resume analysis platform supporting PDF and TXT uploads with OpenAI GPT-4
+   - Extracted candidate skills, contact details, and competencies using structured LLM prompting
+   - Implemented full RAG pipeline — chunking via RecursiveCharacterTextSplitter, embedding via OpenAI, storage in Qdrant Vector DB
+   - Engineered cosine similarity scoring to semantically match candidates against job descriptions
+   - Integrated LangChain tool-calling agents for intelligent query handling and automated responses
+   - Built multi-resume comparison feature and automated email notifications via Nodemailer
+   - Connected Google Docs API for dynamic job description management without redeployment
 
 EDUCATION:
 - Bachelor of Computer Application (BCA), 2022 – 81%
